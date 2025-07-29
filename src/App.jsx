@@ -57,7 +57,7 @@ const App = () => {
         className="absolute inset-0 w-full h-full bg-cover z-0"
       ></div>
       {/* Navigation Bar */}
-      <header className="relative z-10 w-full md:max-w-4xl max-w-sm mx-auto px-5 py-4 mt-10 flex justify-between items-center border border-gray-400 rounded-full">
+      <header className="relative z-10 sm:w-full md:max-w-4xl w-80 mx-auto px-5 py-4 mt-10 flex justify-between items-center border border-gray-400 rounded-full">
         <div className="flex items-center space-x-2">
           <IoIosBookmarks className="size-6 fill-blue-700" />
           <span className="text-2xl font-bold text-blue-700">CivilPrep</span>
@@ -79,7 +79,7 @@ const App = () => {
       </header>
       {/* Main Content Area - Waitlist Focused */}
       <main className="relative z-10 flex flex-col items-center justify-center flex-grow text-center px-4 py-16">
-        <h1 className="lg:text-5xl text-4xl md:text-4xl font-extrabold text-gray-950 leading-tight mb-6 max-w-4xl">
+        <h1 className="lg:text-5xl text-3xl md:text-4xl font-extrabold text-gray-950 leading-tight mb-6 max-w-4xl">
           Your dedicated partner in mastering the{" "}
           <span className="text-blue-500 hover:text-pink-400 transition duration-200">
             📚Civil Service Exam
@@ -120,7 +120,7 @@ const App = () => {
         {/* Waitlist Form */}
         <InputEmail />
       </main>
-      <div className="max-w-4xl gap-4 flex justify-center items-center absolute bottom-10 opacity-60">
+      <div className="max-w-4xl gap-4 flex justify-center items-center  bottom-10 opacity-60">
         <button className="bg-white shadow-xl rounded-full p-3 hover:transform hover:scale-110 hover:bg-gray-100 hover:shadow-2xl transition duration-200 ease-in-out">
           <FaFacebookF className="size-6 text-gray-500 hover:text-blue-600" />
         </button>
