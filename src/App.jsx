@@ -59,10 +59,12 @@ const App = () => {
       {/* Navigation Bar */}
       <header className="relative z-10 sm:w-full md:max-w-4xl w-80 mx-auto px-5 py-4 mt-10 flex justify-between items-center border border-gray-400 rounded-full">
         <div className="flex items-center space-x-2">
-          <IoIosBookmarks className="size-6 fill-blue-700 transition-transform duration-200 hover:scale-110" />
-          <span className="text-2xl font-bold text-blue-700">CivilPrep</span>
+          <IoIosBookmarks className="md:size-6 size-4 fill-blue-700 transition-transform duration-200 hover:scale-110" />
+          <span className="md:text-2xl text-md font-bold text-blue-700">
+            CivilPrep
+          </span>
         </div>
-        <nav className="space-x-8">
+        <nav className="md:space-x-8 space-x-2">
           <a
             href="#"
             className="text-gray-600 hover:text-blue-700 active:text-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
@@ -140,6 +142,7 @@ const App = () => {
           <FaInstagram className="size-6 text-gray-500 hover:text-pink-500" />
         </button>
       </div>
+      <footer className="text-gray-300 mt-4">@CivilPrep 2025</footer>
       {/* Floating CIV.ai Icon */}
       <div className="fixed bottom-8 right-8 z-50">
         <button
