@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
-import { sendChatMessage } from "../services/api.jsx"; // Import the new function
+import Markdown from "markdown-to-jsx";
+import { sendChatMessage } from "../services/api.jsx";
 
 const ChatModal = ({ isOpen, onClose }) => {
   const [messages, setMessages] = useState([
@@ -15,11 +16,23 @@ const ChatModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
+  // Function to preprocess message content and convert img=url to markdown image syntax
+  const processMessageContent = (content) => {
+    // Regex to match img=url patterns
+    const imgRegex = /img=(https?:\/\/[^\s]+)/g;
+    return content.replace(imgRegex, "![Image]($1)");
+  };
+
   const handleSendMessage = async () => {
     if (!input.trim()) return; // Prevent sending empty messages
 
+    // Process user input to convert img=url to markdown image syntax
+    const processedInput = processMessageContent(input);
     // Add user message to the chat
-    const newMessages = [...messages, { role: "user", content: input }];
+    const newMessages = [
+      ...messages,
+      { role: "user", content: processedInput },
+    ];
     setMessages(newMessages);
     setInput(""); // Clear input field
     setIsLoading(true);
@@ -27,8 +40,13 @@ const ChatModal = ({ isOpen, onClose }) => {
     try {
       // Send message using the API function
       const aiResponse = await sendChatMessage(input);
+      // Process AI response to convert img=url to markdown image syntax
+      const processedResponse = processMessageContent(aiResponse);
       // Add AI response to the chat
-      setMessages([...newMessages, { role: "assistant", content: aiResponse }]);
+      setMessages([
+        ...newMessages,
+        { role: "assistant", content: processedResponse },
+      ]);
     } catch (error) {
       // Handle error response
       setMessages([
@@ -45,6 +63,12 @@ const ChatModal = ({ isOpen, onClose }) => {
     if (e.key === "Enter" && !isLoading) {
       handleSendMessage();
     }
+  };
+
+  // Handle image load errors
+  const handleImageError = (e) => {
+    console.error("Failed to load image:", e.target.src);
+    e.target.alt = "Image failed to load";
   };
 
   return (
@@ -68,7 +92,54 @@ const ChatModal = ({ isOpen, onClose }) => {
                 : "bg-gray-100 self-end"
             }`}
           >
-            {msg.content}
+            <Markdown
+              options={{
+                overrides: {
+                  strong: {
+                    component: "strong",
+                    props: { className: "font-bold" },
+                  },
+                  a: {
+                    component: "a",
+                    props: {
+                      className: "text-blue-600 hover:underline",
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    },
+                  },
+                  ul: {
+                    component: "ul",
+                    props: { className: "list-disc list-inside" },
+                  },
+                  li: {
+                    component: "li",
+                    props: { className: "ml-4" },
+                  },
+                  img: {
+                    component: "img",
+                    props: {
+                      className: "max-w-full h-auto rounded-md my-2",
+                      style: { maxWidth: "100%", height: "auto" },
+                      onError: handleImageError,
+                    },
+                  },
+                },
+                wrapper: "div",
+                forceWrapper: true,
+                // Log markdown parsing issues
+                onError: (error) => {
+                  console.error(
+                    "Markdown parsing error:",
+                    error,
+                    "Content:",
+                    msg.content,
+                  );
+                  return <div>{msg.content}</div>; // Fallback to raw content
+                },
+              }}
+            >
+              {msg.content}
+            </Markdown>
           </div>
         ))}
         {isLoading && (
