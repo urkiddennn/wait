@@ -93,7 +93,7 @@ const InputEmail = () => {
           {hasJoined ? "Joined" : "Join the Waitlist"}
         </button>
       </form>
-      {hasJoined && (
+      {/* {hasJoined && (
         <button
           onClick={handleDeleteToken}
           className="mt-4 px-4 py-2 bg-red-500 text-white border-none font-bold rounded hover:bg-red-700"
@@ -101,7 +101,7 @@ const InputEmail = () => {
         >
           {isLoading ? "Deleting..." : "Reset Join Status (Test)"}
         </button>
-      )}
+      )}*/}
       {error && <p className="mt-2 text-red-600 text-center">{error}</p>}
     </>
   );
