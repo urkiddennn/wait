@@ -6,7 +6,7 @@ import {
   deleteDeviceToken,
 } from "../services/api.jsx";
 
-const InputEmail = () => {
+const InputEmail = ({ onJoined }) => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasJoined, setHasJoined] = useState(false);
@@ -43,6 +43,9 @@ const InputEmail = () => {
       localStorage.setItem("waitlistToken", response.data.deviceToken);
       setHasJoined(true);
       setEmail("");
+      if (typeof onJoined === "function") {
+        onJoined();
+      }
     } catch (err) {
       console.error("Join waitlist error:", err.message);
       setError(err.message || "Failed to join waitlist");
@@ -101,7 +104,8 @@ const InputEmail = () => {
         >
           {isLoading ? "Deleting..." : "Reset Join Status (Test)"}
         </button>
-      )}*/}
+      )} */}
+
       {error && <p className="mt-2 text-red-600 text-center">{error}</p>}
     </>
   );

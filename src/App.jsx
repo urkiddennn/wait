@@ -13,6 +13,7 @@ import FeatureSection from "./sections/FeatureSection";
 const App = () => {
   const [totalJoined, setTotalJoined] = useState(0);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [joined, setJoined] = useState(false);
 
   useEffect(() => {
     const fetchTotalJoined = async () => {
@@ -27,6 +28,13 @@ const App = () => {
     };
     fetchTotalJoined();
   }, []);
+
+  useEffect(() => {
+    if (joined) {
+      const timer = setTimeout(() => setJoined(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [joined]);
 
   const toggleChat = () => {
     setIsChatOpen(!isChatOpen);
@@ -104,7 +112,7 @@ const App = () => {
         <br />
 
         {/* Waitlist Form */}
-        <InputEmail />
+        <InputEmail onJoined={() => setJoined(true)} />
       </main>
       {/* The feature sections */}
       <FeatureSection />
@@ -135,6 +143,14 @@ const App = () => {
       </div>
       {/* Chat Modal Component */}
       <ChatModal isOpen={isChatOpen} onClose={toggleChat} />
+      {joined && (
+        <div
+          role="alert"
+          className="alert alert-success alert-outline fixed bottom-10 right-10 z-50"
+        >
+          <span>Your purchase has been confirmed!</span>
+        </div>
+      )}
     </div>
   );
 };
