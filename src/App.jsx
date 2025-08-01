@@ -11,7 +11,6 @@ import Header from "./components/Header";
 import FeatureSection from "./sections/FeatureSection";
 
 import FooterSection from "./sections/FooterSection";
-import HeaderInfo from "./components/HeaderInfo";
 
 const App = () => {
   const [totalJoined, setTotalJoined] = useState(0);
@@ -70,7 +69,7 @@ const App = () => {
         }}
         className="absolute inset-0 w-full h-full bg-cover z-0"
       ></div>
-      <HeaderInfo />
+
       {/* Navigation Bar */}
       <Header />
       {/* Main Content Area - Waitlist Focused */}
