@@ -1,36 +1,41 @@
 import React, { useState, useEffect } from "react";
-import { FaFacebookF } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa";
-
+import { Routes, Route } from "react-router-dom";
 import { PiRobotFill } from "react-icons/pi";
-import InputEmail from "./components/InputEmail";
+
 import ChatModal from "./components/ChatModal";
-import { getTotalJoined } from "./services/api";
+
 import Header from "./components/Header";
 import FeatureSection from "./sections/FeatureSection";
 
 import FooterSection from "./sections/FooterSection";
+import HeroSection from "./sections/HeroSection";
+import BlogPage from "./sections/pages/BlogPage";
+
+const LandingPage = ({ onJoined }) => (
+  <>
+    {/* Navigation Bar */}
+    <Header />
+    {/* Main Content Area - Waitlist Focused */}
+    <HeroSection onJoined={onJoined} />
+    <br />
+    <br />
+    <br />
+    {/* The feature sections */}
+    <FeatureSection />
+    {/* Footer section*/}
+    <FooterSection />
+  </>
+);
 
 const App = () => {
-  const [totalJoined, setTotalJoined] = useState(0);
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [joined, setJoined] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchTotalJoined = async () => {
-      try {
-        const total = await getTotalJoined();
-        console.log("Total Joined: ", total);
-        setTotalJoined(total);
-      } catch (error) {
-        console.error("Failed to fetch total joined:", error.message);
-        setTotalJoined(0); // Fallback to 0 on error
-      }
-    };
-    fetchTotalJoined();
-  }, []);
+  const toggleChat = () => {
+    setIsChatOpen(!isChatOpen);
+  };
 
+  // Handle alert timer here
   useEffect(() => {
     if (joined) {
       const timer = setTimeout(() => setJoined(false), 3000);
@@ -38,14 +43,9 @@ const App = () => {
     }
   }, [joined]);
 
-  const toggleChat = () => {
-    setIsChatOpen(!isChatOpen);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-white text-gray-900 overflow-hidden relative font-sans">
       {/* Grid Background Layer */}
-
       <div
         style={{
           backgroundImage: `
@@ -69,62 +69,14 @@ const App = () => {
         }}
         className="absolute inset-0 w-full h-full bg-cover z-0"
       ></div>
-
-      {/* Navigation Bar */}
-      <Header />
-      {/* Main Content Area - Waitlist Focused */}
-      <main className="relative max-w-5xl z-10 flex flex-col items-center justify-center flex-grow text-center px-4 py-16">
-        <h1 className="lg:text-5xl text-3xl md:text-4xl font-extrabold text-gray-950 leading-tight mb-6 max-w-4xl">
-          Your dedicated partner in mastering the{" "}
-          <span className="text-blue-500 hover:text-pink-400 transition duration-200">
-            📚Civil Service Exam
-          </span>{" "}
-          and building a successful career in public service
-        </h1>
-        <p className="text-lg md:text-xl text-gray-700 mb-10 max-w-2xl">
-          Join our exclusive waitlist for early access to the definitive
-          platform for mastering the Civil Service Exam.
-        </p>
-
-        <div className="flex flex-col justify-center items-center gap-2">
-          <div className="avatar-group -space-x-4">
-            <div className="avatar border-white">
-              <div className="w-12">
-                <img src="https://img.daisyui.com/images/profile/demo/batperson@192.webp" />
-              </div>
-            </div>
-            <div className="avatar border-white">
-              <div className="w-12">
-                <img src="https://img.daisyui.com/images/profile/demo/spiderperson@192.webp" />
-              </div>
-            </div>
-            <div className="avatar border-white">
-              <div className="w-12">
-                <img src="https://img.daisyui.com/images/profile/demo/averagebulk@192.webp" />
-              </div>
-            </div>
-            <div className="avatar avatar-placeholder border-white">
-              <div className="bg-neutral text-neutral-content w-12">
-                <span>+{totalJoined}</span>
-              </div>
-            </div>
-          </div>
-          <div className="text-blue-300 font-semibold text-md">
-            people are wating...
-          </div>
-        </div>
-        <br />
-
-        {/* Waitlist Form */}
-        <InputEmail onJoined={() => setJoined(true)} />
-      </main>
-      <br></br>
-      <br></br>
-      <br></br>
-      {/* The feature sections */}
-      <FeatureSection />
-      {/* Footer section*/}
-      <FooterSection />
+      <Routes>
+        <Route
+          path="/"
+          element={<LandingPage onJoined={() => setJoined(true)} />}
+        />
+        <Route path="/BlogPage" element={<BlogPage />} />
+        {/* Add more routes here as needed */}
+      </Routes>
       {/* Floating CIV.ai Icon */}
       <div className="fixed bottom-8 right-8 z-50">
         <button
