@@ -2,7 +2,7 @@ import { IoIosBookmarks } from "react-icons/io";
 
 const Header = () => {
   return (
-    <header className="relative z-10 sm:w-full md:max-w-5xl w-80 mx-auto px-7 py-4 mt-18 flex justify-between items-center border border-gray-400 rounded-full">
+    <header className="relative z-10 sm:w-full md:max-w-5xl w-80 mx-auto px-7 py-4 mt-10 flex justify-between items-center border border-gray-400 rounded-full">
       <div className="flex items-center space-x-2">
         <IoIosBookmarks className="md:size-6 size-4 fill-blue-700 transition-transform duration-200 hover:scale-110" />
         <span className="md:text-2xl text-md font-bold text-blue-700">
