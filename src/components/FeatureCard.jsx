@@ -10,7 +10,7 @@ const FeatureCard = ({
 }) => {
   return (
     <div
-      className="flex flex-col justify-start items-start p-4 border border-gray-300 rounded-lg bg-white shadow-md hover:shadow-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      className="h-full flex flex-col justify-between text-start items-start p-4  rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
       role="button"
       tabIndex={0}
       aria-label={`Learn more about ${title}`}
@@ -21,16 +21,16 @@ const FeatureCard = ({
       >
         <Icon
           style={{ color: iconColor }}
-          className="size-8 group-hover:animate-pulse"
+          className="size-8 group-hover:animate-bounce"
           aria-hidden="true"
         />
       </div>
-      <h1 className="text-xl font-bold mt-4 text-gray-800">{title}</h1>
+      <h1 className="text-2xl font-bold mt-4 text-gray-800">{title}</h1>
       <ul className="mt-3 space-y-2 text-gray-600">
         {listItems.map((item, index) => (
           <li
             key={index}
-            className="flex items-start text-sm before:content-['\2022'] before:mr-2 before:text-indigo-500 before:font-bold before:text-lg"
+            className="flex items-start text-lg before:content-['\2022'] before:mr-2 before:text-indigo-500 before:font-bold before:text-lg"
           >
             {item}
           </li>
