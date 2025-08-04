@@ -27,6 +27,17 @@ const LandingPage = ({ onJoined }) => (
   </>
 );
 
+// Blog page
+const BlogPageScreen = () => {
+  return (
+    <>
+      <Header />
+      <BlogPage />
+      <FooterSection />
+    </>
+  );
+};
+
 const App = () => {
   const [joined, setJoined] = useState(false);
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -74,7 +85,7 @@ const App = () => {
           path="/"
           element={<LandingPage onJoined={() => setJoined(true)} />}
         />
-        <Route path="/BlogPage" element={<BlogPage />} />
+        <Route path="/BlogPage" element={<BlogPageScreen />} />
         {/* Add more routes here as needed */}
       </Routes>
       {/* Floating CIV.ai Icon */}

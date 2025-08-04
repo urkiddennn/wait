@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogDetail = ({ title, date, content, onBack }) => {
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-5xl w-full py-10 px-4">
       <button
         className="mb-6 text-blue-600 hover:underline font-medium"
         onClick={onBack}

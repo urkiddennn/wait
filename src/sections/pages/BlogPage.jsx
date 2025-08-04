@@ -2,6 +2,8 @@ import Header from "../../components/Header";
 import { useState } from "react";
 import BlogList from "./blog/BlogList";
 import BlogDetail from "./blog/BlogDetail";
+import FooterSection from "../FooterSection";
+import { useNavigate } from "react-router-dom";
 
 const samplePosts = [
   {
@@ -74,24 +76,31 @@ const samplePosts = [
 ];
 
 const BlogPage = () => {
+  const navigate = useNavigate();
+
   const [selectedPostId, setSelectedPostId] = useState(null);
 
   const selectedPost = samplePosts.find((post) => post.id === selectedPostId);
 
+  // handle go to home screen
+  const gotoHome = () => {
+    navigate("/");
+  };
   return (
     <>
-      <Header />
-      <div className="w-full min-h-screen z-10 flex flex-col items-center justify-start">
-        {selectedPostId === null ? (
-          <BlogList posts={samplePosts} onSelectPost={setSelectedPostId} />
-        ) : (
-          <BlogDetail
-            title={selectedPost.title}
-            date={selectedPost.date}
-            content={selectedPost.content}
-            onBack={() => setSelectedPostId(null)}
-          />
-        )}
+      <div className="relative max-w-5xl z-20 flex flex-col items-center justify-center flex-grow text-center px-4 py-16">
+        <div className="w-full h-full z-10 flex flex-col items-center justify-center">
+          {selectedPostId === null ? (
+            <BlogList posts={samplePosts} onSelectPost={setSelectedPostId} />
+          ) : (
+            <BlogDetail
+              title={selectedPost.title}
+              date={selectedPost.date}
+              content={selectedPost.content}
+              onBack={() => setSelectedPostId(null)}
+            />
+          )}
+        </div>
       </div>
     </>
   );

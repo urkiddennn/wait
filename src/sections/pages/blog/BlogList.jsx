@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogList = ({ posts, onSelectPost }) => {
   return (
-    <div className="w-full max-w-2xl mx-auto py-8">
+    <div className="w-full max-w-5xl mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6 text-center text-blue-700">
         Blog
       </h1>
@@ -14,7 +14,7 @@ const BlogList = ({ posts, onSelectPost }) => {
         {posts.map((post) => (
           <button
             key={post.id}
-            className="w-full text-left border rounded-xl p-6 shadow hover:shadow-lg hover:bg-blue-50 transition flex flex-col items-start"
+            className="w-full p-4 rounded-md text-lefts hover:shadow-lg hover:bg-blue-50 transition flex flex-col items-start"
             onClick={() => onSelectPost(post.id)}
           >
             <h2 className="text-xl font-semibold mb-2 text-gray-900">
