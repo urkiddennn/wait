@@ -4,13 +4,13 @@ import { AiFillClockCircle } from "react-icons/ai";
 const FeatureCard = ({
   icon: Icon = AiFillClockCircle,
   title,
-  listItems = [],
+  description,
   iconBg, // Expect a valid CSS color (e.g., 'red', '#ff0000', etc.)
   iconColor = "indigo", // Expect a valid CSS color
 }) => {
   return (
     <div
-      className="h-full flex flex-col justify-between text-start items-start p-4  rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      className="h-full flex flex-col justify-between text-center items-center p-4  rounded-lg hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-500"
       role="button"
       tabIndex={0}
       aria-label={`Learn more about ${title}`}
@@ -26,16 +26,7 @@ const FeatureCard = ({
         />
       </div>
       <h1 className="text-2xl font-bold mt-4 text-gray-800">{title}</h1>
-      <ul className="mt-3 space-y-2 text-gray-600">
-        {listItems.map((item, index) => (
-          <li
-            key={index}
-            className="flex items-start text-lg before:content-['\2022'] before:mr-2 before:text-indigo-500 before:font-bold before:text-lg"
-          >
-            {item}
-          </li>
-        ))}
-      </ul>
+      <p>{description}</p>
     </div>
   );
 };
@@ -43,7 +34,7 @@ const FeatureCard = ({
 FeatureCard.propTypes = {
   icon: PropTypes.elementType,
   title: PropTypes.string,
-  listItems: PropTypes.arrayOf(PropTypes.string),
+  description: PropTypes.arrayOf(PropTypes.string),
   iconBg: PropTypes.string,
   iconColor: PropTypes.string,
 };

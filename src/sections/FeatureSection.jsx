@@ -11,36 +11,29 @@ const FeatureSection = () => {
     {
       icon: AiFillClockCircle,
       title: "Time Management",
-      listItems: [
-        "Track tasks efficiently",
-        "Set reminders",
-        "Schedule meetings",
-      ],
+      description: "Track tasks efficiently",
+
       iconBg: "#4E71FF", // Amber-600
       iconColor: "#8DD8FF", // Indigo-300
     },
     {
       icon: AiFillStar,
       title: "Priority Tasks",
-      listItems: [
-        "Highlight key tasks",
-        "Mark as urgent",
-        "Star important items",
-      ],
+      description: "Highlight key tasks",
       iconBg: "#FFBC4C", // Amber-600
       iconColor: "#FFDE63", // Amber-300
     },
     {
       icon: AiFillHeart,
       title: "Team Collaboration",
-      listItems: ["Share tasks", "Real-time updates", "Assign roles"],
+      description: "Share tasks",
       iconBg: "#dc2626", // Red-600
       iconColor: "#f87171", // Red-300
     },
     {
       icon: AiFillBulb,
       title: "Innovative Ideas",
-      listItems: ["Brainstorm sessions", "Idea tracking", "Creative workflows"],
+      description: "Brainstorm session",
       iconBg: "#78C841", // Green-600
       iconColor: "#B4E50D", // Indigo-300
     },
@@ -64,7 +57,7 @@ const FeatureSection = () => {
               key={index}
               icon={feature.icon}
               title={feature.title}
-              listItems={feature.listItems}
+              description={feature.description}
               iconBg={feature.iconBg}
               iconColor={feature.iconColor}
             />
